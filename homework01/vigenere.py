@@ -20,7 +20,7 @@ def encrypt_vigenere(plaintext: str, keyword: str) -> str:
             ciphertext += chr(((ord(char) - base + shift) % 26) + base)
             keyword_index += 1
         else:
-            ciphertext += char
+            ciphertext += char  # Append spaces directly without encryption
 
     return ciphertext
 
@@ -48,6 +48,6 @@ def decrypt_vigenere(ciphertext: str, keyword: str) -> str:
             plaintext += decrypted_char
             keyword_index += 1
         else:
-            plaintext += char
+            plaintext += char  # Append spaces directly without decryption
 
     return plaintext
