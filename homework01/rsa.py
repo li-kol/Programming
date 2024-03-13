@@ -15,12 +15,18 @@ def is_prime(n: int) -> bool:
     False
     """
     # PUT YOUR CODE HERE
-    if n == 2:
+    if n >= 2:
+        if n == 2:
+            return True
+        for i in range(2, n):
+            if n % i == 0:
+                return False
         return True
-    for i in range(2, n):
-        if n % i == 0:
-            return False
-    return True
+    else:
+        for i in range(n, 2):
+            if n % i == 0:
+                return False
+        return True
 
 
 def gcd(a: int, b: int) -> int:
@@ -31,21 +37,23 @@ def gcd(a: int, b: int) -> int:
     >>> gcd(3, 7)
     1
     """
-    # PUT YOUR CODE HERE
     a_list_of_divisors = []
     b_list_of_divisors = []
+
     for i in range(1, a):
         if a % i == 0:
             a_list_of_divisors.append(i)
+
     for i in range(1, b):
         if b % i == 0:
             b_list_of_divisors.append(i)
+
     common_elements = list(set(a_list_of_divisors) & set(b_list_of_divisors))
-    gcd = max(common_elements)
-    if gcd == []:
+
+    if not common_elements:  # Check if the list is empty
         return 1
     else:
-        return gcd
+        return max(common_elements)
 
 
 def multiplicative_inverse(e: int, phi: int) -> int:
