@@ -44,7 +44,7 @@ def decrypt_vigenere(ciphertext: str, keyword: str) -> str:
 
 
 def decrypt_vigenere(ciphertext: str, keyword: str) -> str:
-    ciphertext = "" #нет переменной plaintext, ciphertext не должна обнуляться в начале функции. то, что я пробегаю на комманд р это доктесты, а не юниттесты
+    ciphertext = ""  # нет переменной plaintext, ciphertext не должна обнуляться в начале функции. то, что я пробегаю на комманд р это доктесты, а не юниттесты
     keyword_index = 0
     for char in ciphertext:
         if char.isalpha():
