@@ -1,3 +1,4 @@
+"""module docstring"""
 import random
 import typing as tp
 
@@ -13,8 +14,12 @@ def is_prime(n: int) -> bool:
     False
     """
     # PUT YOUR CODE HERE
-    pass
-
+    if n == 2:
+        return True
+    for i in range(2, n):
+        if n % i == 0:
+            return False
+    return True
 
 def gcd(a: int, b: int) -> int:
     """
@@ -25,7 +30,20 @@ def gcd(a: int, b: int) -> int:
     1
     """
     # PUT YOUR CODE HERE
-    pass
+    a_list_of_divisors = []
+    b_list_of_divisors = []
+    for i in range(1, a):
+        if a % i == 0:
+            a_list_of_divisors.append(i)
+    for i in range(1, b):
+        if b % i == 0:
+            b_list_of_divisors.append(i)
+    common_elements = list(set(a_list_of_divisors) & set(b_list_of_divisors))
+    gcd = max(common_elements)
+    if gcd == []:
+        return 1
+    else:
+        return gcd
 
 
 def multiplicative_inverse(e: int, phi: int) -> int:
@@ -35,8 +53,22 @@ def multiplicative_inverse(e: int, phi: int) -> int:
     >>> multiplicative_inverse(7, 40)
     23
     """
-    # PUT YOUR CODE HERE
-    pass
+
+    def egcd(a, b):
+        if a == 0:
+            return (b, 0, 1)
+        else:
+            g, y, x = egcd(b % a, a)
+            return (g, x - (b // a) * y, y)
+
+    g, x, y = egcd(e, phi)
+    if g != 1:
+        raise Exception("Modular inverse does not exist")
+    else:
+        return x % phi
+
+
+# PUT YOUR CODE HERE
 
 
 def generate_keypair(p: int, q: int) -> tp.Tuple[tp.Tuple[int, int], tp.Tuple[int, int]]:
@@ -47,10 +79,10 @@ def generate_keypair(p: int, q: int) -> tp.Tuple[tp.Tuple[int, int], tp.Tuple[in
 
     # n = pq
     # PUT YOUR CODE HERE
-
+    n = p * q
     # phi = (p-1)(q-1)
     # PUT YOUR CODE HERE
-
+    phi = (p - 1) * (q - 1)
     # Choose an integer e such that e and phi(n) are coprime
     e = random.randrange(1, phi)
 
@@ -78,12 +110,11 @@ def encrypt(pk: tp.Tuple[int, int], plaintext: str) -> tp.List[int]:
     return cipher
 
 
-def decrypt(pk: tp.Tuple[int, int], ciphertext: tp.List[int]) -> str:
+def decrypt(pk: tp.Tuple[int, int], ciphertext: tp.List[int]) -> str:  # function call synta  x
     # Unpack the key into its components
     key, n = pk
-    # Generate the plaintext based on the ciphertext and key using a^b mod m
     plain = [chr((char**key) % n) for char in ciphertext]
-    # Return the array of bytes as a string
+    # Return the array of bytes as a string (plain)
     return "".join(plain)
 
 
