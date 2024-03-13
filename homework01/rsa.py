@@ -51,8 +51,12 @@ def gcd(a: int, b: int) -> int:
     common_elements = list(set(a_list_of_divisors) & set(b_list_of_divisors))
 
     if not common_elements:  # Check if the list is empty
-        if a == 0 or b == 0:
+        if a == 0 and b == 0:
             return 0
+        elif a == 0:
+            return b
+        elif b == 0:
+            return a
         return 1
     else:
         return max(common_elements)
