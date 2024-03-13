@@ -1,4 +1,5 @@
 """module docstring"""
+
 import random
 import typing as tp
 
@@ -20,6 +21,7 @@ def is_prime(n: int) -> bool:
         if n % i == 0:
             return False
     return True
+
 
 def gcd(a: int, b: int) -> int:
     """
