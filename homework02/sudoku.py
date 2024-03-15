@@ -1,9 +1,9 @@
 """import statements"""
 import multiprocessing
 import pathlib
+import random
 import time
 import typing as tp
-import random
 
 """template"""
 
