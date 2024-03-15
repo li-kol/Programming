@@ -1,10 +1,15 @@
+"""import statements"""
 import multiprocessing
 import pathlib
 import time
 import typing as tp
+import random
+
+"""template"""
 
 
 def run_solve(filename: str) -> None:
+    """docstring"""
     grid = read_sudoku(filename)
     start = time.time()
     solve(grid)
@@ -20,11 +25,14 @@ T = tp.TypeVar("T")
 
 
 def read_sudoku(path: tp.Union[str, pathlib.Path]) -> tp.List[tp.List[str]]:
-    """Прочитать Судоку из указанного файла"""
+    """Read Sudoku from the specified file"""
     path = pathlib.Path(path)
-    with path.open() as f:
+    with path.open(encoding="utf-8") as f:
         puzzle = f.read()
     return create_grid(puzzle)
+
+
+"""create_grid"""
 
 
 def create_grid(puzzle: str) -> tp.List[tp.List[str]]:
