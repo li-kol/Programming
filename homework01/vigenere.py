@@ -10,17 +10,19 @@ def encrypt_vigenere(plaintext: str, keyword: str) -> str:
     """
     ciphertext = ""
     keyword_index = 0
-    for char in plaintext:
+    for index, char in enumerate(plaintext):
         if char.isalpha():
             if char.isupper():
                 base = ord("A")
             else:
                 base = ord("a")
-            shift = ord(keyword[keyword_index % len(keyword)]) - base
-            ciphertext += chr(((ord(char) - base + shift) % 26) + base)
+            key_shift = ord(keyword[index % len(keyword)]) - base
+            char_shift = ord(char) - base
+            shift = (char_shift + key_shift) % 26
+            ciphertext += chr(shift + base)
             keyword_index += 1
         else:
-            ciphertext += char  # Append spaces directly without encryption
+            ciphertext += char
 
     return ciphertext
 
@@ -36,18 +38,21 @@ def decrypt_vigenere(ciphertext: str, keyword: str) -> str:
     'ATTACKATDAWN'
     """
     plaintext = ""
-    keyword_index = 0
-    for char in ciphertext:
+
+    for index, char in enumerate(ciphertext):
         if char.isalpha():
-            if char.isupper():
-                base = ord("A")
-            else:
+            keyword_char = keyword[index % len(keyword)]
+            if char.islower():
                 base = ord("a")
-            shift = ord(keyword[keyword_index % len(keyword)]) - base
-            decrypted_char = chr(((ord(char) - base - shift) % 26) + base)
+            else:
+                base = ord("A")
+            key_shift = ord(keyword_char) - base
+            char_shift = ord(char) - base
+            shift = (char_shift - key_shift + 26) % 26
+
+            decrypted_char = chr(shift + base)
             plaintext += decrypted_char
-            keyword_index += 1
         else:
-            plaintext += char  # Append spaces directly without decryption
+            plaintext += char
 
     return plaintext
