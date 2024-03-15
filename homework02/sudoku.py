@@ -160,10 +160,17 @@ def solve(grid: tp.List[tp.List[str]]) -> tp.Optional[tp.List[tp.List[str]]]:
 
 def check_solution(solution: tp.List[tp.List[str]]) -> bool:
     """Если решение solution верно, то вернуть True, в противном случае False"""
-    if __name__ == "__main__":
-        import doctest
-
-        doctest.testmod()
+    if not solution:
+        return False
+    for i in range(9):
+        for j in range(9):
+            col = get_col(solution, (i, j))
+            row = get_row(solution, (i, j))
+            block = get_block(solution, (i, j))
+            for num in range(1, 10):
+                if col.count(str(num)) < 1 or row.count(str(num)) < 1 or block.count(str(num)) < 1:
+                    return False
+    return True
 
 
 def generate_sudoku(N: int) -> tp.List[tp.List[str]]:
